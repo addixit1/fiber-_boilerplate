@@ -1,0 +1,254 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Production ready Fiber backend",
+        "title": "Fiber Boilerplate",
+        "termsOfService": "https://example.com/terms",
+        "contact": {
+            "name": "Aman Dixit",
+            "email": "aman.dixit@appinevtiv.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:3010",
+    "basePath": "/api/v1",
+    "paths": {
+        "/users": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get all users with search",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "List users",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Search by name",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "1",
+                            "2",
+                            "3"
+                        ],
+                        "type": "string",
+                        "default": "1",
+                        "description": "Device OS: 1-Android, 2-iOS, 3-WEB",
+                        "name": "platform",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "default": "Asia/Kolkata",
+                        "description": "Time zone",
+                        "name": "timezone",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 0,
+                        "description": "Time zone offset",
+                        "name": "offset",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "en",
+                            "hi"
+                        ],
+                        "type": "string",
+                        "default": "en",
+                        "description": "Language: en, hi",
+                        "name": "accept-language",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "default": "v1",
+                        "description": "App version",
+                        "name": "appversion",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "default": "v1",
+                        "description": "Route version",
+                        "name": "routeversion",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "description": "Create a new user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user",
+                "parameters": [
+                    {
+                        "description": "Create user",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_modules_user_v1.CreateUserDTO"
+                        }
+                    },
+                    {
+                        "enum": [
+                            "1",
+                            "2",
+                            "3"
+                        ],
+                        "type": "string",
+                        "default": "1",
+                        "description": "Device OS: 1-Android, 2-iOS, 3-WEB",
+                        "name": "platform",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "default": "Asia/Kolkata",
+                        "description": "Time zone",
+                        "name": "timezone",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 0,
+                        "description": "Time zone offset",
+                        "name": "offset",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "en",
+                            "hi"
+                        ],
+                        "type": "string",
+                        "default": "en",
+                        "description": "Language: en, hi",
+                        "name": "accept-language",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "default": "v1",
+                        "description": "App version",
+                        "name": "appversion",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "default": "v1",
+                        "description": "Route version",
+                        "name": "routeversion",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "github_com_addixit1_fiber-boilerplate_internal_config.APIResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string"
+                },
+                "statusCode": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_modules_user_v1.CreateUserDTO": {
+            "type": "object",
+            "required": [
+                "email",
+                "name"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "aman@gmail.com"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Aman"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        },
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

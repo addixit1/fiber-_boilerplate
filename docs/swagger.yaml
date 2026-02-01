@@ -1,0 +1,173 @@
+basePath: /api/v1
+definitions:
+  github_com_addixit1_fiber-boilerplate_internal_config.APIResponse:
+    properties:
+      data: {}
+      message:
+        type: string
+      statusCode:
+        type: integer
+      type:
+        type: string
+    type: object
+  internal_modules_user_v1.CreateUserDTO:
+    properties:
+      email:
+        example: aman@gmail.com
+        type: string
+      name:
+        example: Aman
+        type: string
+    required:
+    - email
+    - name
+    type: object
+host: localhost:3010
+info:
+  contact:
+    email: aman.dixit@appinevtiv.com
+    name: Aman Dixit
+  description: Production ready Fiber backend
+  termsOfService: https://example.com/terms
+  title: Fiber Boilerplate
+  version: "1.0"
+paths:
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get all users with search
+      parameters:
+      - description: Search by name
+        in: query
+        name: search
+        type: string
+      - default: "1"
+        description: 'Device OS: 1-Android, 2-iOS, 3-WEB'
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        in: header
+        name: platform
+        type: string
+      - default: Asia/Kolkata
+        description: Time zone
+        in: header
+        name: timezone
+        type: string
+      - default: 0
+        description: Time zone offset
+        in: header
+        name: offset
+        type: integer
+      - default: en
+        description: 'Language: en, hi'
+        enum:
+        - en
+        - hi
+        in: header
+        name: accept-language
+        type: string
+      - default: v1
+        description: App version
+        in: header
+        name: appversion
+        type: string
+      - default: v1
+        description: Route version
+        in: header
+        name: routeversion
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse'
+      security:
+      - BearerAuth: []
+      summary: List users
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Create a new user
+      parameters:
+      - description: Create user
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/internal_modules_user_v1.CreateUserDTO'
+      - default: "1"
+        description: 'Device OS: 1-Android, 2-iOS, 3-WEB'
+        enum:
+        - "1"
+        - "2"
+        - "3"
+        in: header
+        name: platform
+        type: string
+      - default: Asia/Kolkata
+        description: Time zone
+        in: header
+        name: timezone
+        type: string
+      - default: 0
+        description: Time zone offset
+        in: header
+        name: offset
+        type: integer
+      - default: en
+        description: 'Language: en, hi'
+        enum:
+        - en
+        - hi
+        in: header
+        name: accept-language
+        type: string
+      - default: v1
+        description: App version
+        in: header
+        name: appversion
+        type: string
+      - default: v1
+        description: Route version
+        in: header
+        name: routeversion
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_addixit1_fiber-boilerplate_internal_config.APIResponse'
+      security:
+      - basicAuth: []
+      summary: Create a new user
+      tags:
+      - Users
+securityDefinitions:
+  BasicAuth:
+    type: basic
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
