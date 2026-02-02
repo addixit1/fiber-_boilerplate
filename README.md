@@ -397,7 +397,7 @@ This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENS
 ## 👨‍💻 Author
 
 **Aman Dixit**
-- Email: aman.dixit@appinevtiv.com
+- Email: aman.dixitiimt@gmail.com
 - GitHub: [@addixit1](https://github.com/addixit1)
 
 ---
